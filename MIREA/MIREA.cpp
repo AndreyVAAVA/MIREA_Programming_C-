@@ -17,7 +17,7 @@ int main()
     Task4* obj3 = new Task4();
     //obj1->task5();
     //obj2->task3("task3.txt");
-    obj3->task6();
+    obj3->task5();
     /*obj2->task4("task3.txt");
     obj2->task5();*/
     /*obj2->task4("task3.txt");*/
