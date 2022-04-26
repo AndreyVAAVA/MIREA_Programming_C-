@@ -22,14 +22,24 @@ void Task3::task2() {
 	double m, p, n, S, m_perm;
 	std::cin >> m >> n >> S;
 	m_perm = 0;
-	p = DBL_MAX;
-	while (m - m_perm > 0.1 || m_perm - m < 0.1)
+	p = DBL_MAX/2;
+	double diff = m - m_perm;
+	double endValue = DBL_MAX;
+	double startValue = 0;
+	while (diff > 0.1)
 	{
 		m_perm = S * r_calc(p) * pow(1 + r_calc(p), n) / (12 * (pow(1 + r_calc(p), n) - 1));
 		if (m_perm > m)
 		{
-			p /= 2;
+			endValue = p;
+			p = p - (p - startValue)/2;
 		}
+		else
+		{
+			startValue = p;
+			p = p + (endValue - p)/2;
+		}
+		diff = abs(m_perm - m);
 	}
 	std::cout << p << "\n";
 }
@@ -89,19 +99,21 @@ void Task3::task5() {
 	std::string sorted;
 	std::string String30;
 	std::cin >> String30;
-	int number_to_paste = 0;
-	for (auto i : String30)
+	char number_to_paste = 0;
+	for (int i = 0; i < String30.length(); i++)
 	{
-		for (auto j : sorted) {
-			if (toupper(j) > toupper(i))
+		for (int j = 0; j < String30.length(); j++) {
+			if (String30[i] > String30[j])
 			{
-				number_to_paste = j;
+				number_to_paste = String30[i];
+				String30[i] = String30[j];
+				String30[j] = number_to_paste;
+				i = 0;
 				break;
 			}
 		}
-		sorted[number_to_paste] = i;
 	}
-	std::cout << sorted;
+	std::cout << String30;
 }
 
 double Task3::r_calc(double p) {

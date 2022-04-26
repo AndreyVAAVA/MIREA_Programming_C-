@@ -79,7 +79,6 @@ void Task2::task5() {
         if (x == 1)
         {
             std::cout << "Impossible to calc\n";
-            ;
         }
         else
         {

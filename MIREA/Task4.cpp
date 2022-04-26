@@ -46,7 +46,7 @@ void Task4::task1(std::string path)
 			fin.close();
 		}
 	}
-	
+
 }
 
 int Task4::task2(double x)
@@ -97,7 +97,7 @@ void Task4::task3()
 	}
 	else
 	{
-		std::cout << "There is an error in name"
+		std::cout << "There is an error in name";
 	}
 }
 
@@ -142,6 +142,7 @@ void Task4::task4()
 
 void Task4::task5()
 {
+	//std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
 	float x;
 	HDC hDC = GetDC(GetConsoleWindow());
 	HPEN Pen = CreatePen(PS_SOLID, 2, RGB(255, 255, 255));
@@ -156,6 +157,7 @@ void Task4::task5()
 		MoveToEx(hDC, scale * x + 100, -scale * sin(x) + 85, NULL);
 		LineTo(hDC, scale * x + 100, -scale * sin(x) + 85);
 	}
+	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
 }
 
 void Task4::task6()
@@ -248,7 +250,7 @@ void Task4::task9(long number, byte systemNumberWas, byte systemNumberWanted)
 			stringNumbers[char(i)] = counter++;
 		}
 		byte maxCharIndex = systemNumberWas;
-		
+
 	}
 
 }
