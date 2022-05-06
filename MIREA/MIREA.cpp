@@ -9,18 +9,21 @@
 #include "Task2.h"
 #include "Task3.h"
 #include "Task4.h"
+#include "Task5.h"
 
 int main()
 {
-    Task2* obj1 = new Task2();
+    Task2 obj1;
     Task3* obj2 = new Task3();
     Task4* obj3 = new Task4();
+    Task5 obj4;
+    obj4.task1(48, 32, true);
     //obj1->task5();
     //obj2->task3("task3.txt");
-    obj3->task4();
+    //obj3->task4();
     //obj3->task5();
-    /*obj2->task4("task3.txt");
-    obj2->task5();*/
+    //obj2->task4("task3.txt");
+    //obj2->task2();
     /*obj2->task4("task3.txt");*/
 }
 

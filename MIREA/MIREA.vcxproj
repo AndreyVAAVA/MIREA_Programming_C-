@@ -143,11 +143,13 @@
     <ClCompile Include="Task2.cpp" />
     <ClCompile Include="Task3.cpp" />
     <ClCompile Include="Task4.cpp" />
+    <ClCompile Include="Task5.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Task2.h" />
     <ClInclude Include="Task3.h" />
     <ClInclude Include="Task4.h" />
+    <ClInclude Include="Task5.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="task3.txt" />

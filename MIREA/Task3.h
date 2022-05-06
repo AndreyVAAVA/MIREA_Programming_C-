@@ -14,9 +14,8 @@ public:
 	void task1();
 	void task2();
 	void task3(std::string path);
-
 	void task4(std::string path);
-	void task5();
+	std::string task5(std::string String30);
 
 };
 

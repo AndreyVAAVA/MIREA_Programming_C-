@@ -19,27 +19,34 @@ void Task3::task1() {
 	}
 }
 void Task3::task2() {
-	double m, p, n, S, m_perm;
+	//29982
+	//10
+	//2000000
+	double m, p, n, S, m_var;
 	std::cin >> m >> n >> S;
-	m_perm = 0;
+	m_var = 0;
 	p = DBL_MAX/2;
-	double diff = m - m_perm;
-	double endValue = DBL_MAX;
+	double diff = abs(m - m_var);
+	double endValue = DBL_MAX/2;
 	double startValue = 0;
-	while (diff > 0.1)
+	double middle = 0;
+	while (!(diff >= 0 && diff < 0.1))
 	{
-		m_perm = S * r_calc(p) * pow(1 + r_calc(p), n) / (12 * (pow(1 + r_calc(p), n) - 1));
-		if (m_perm > m)
+		m_var = S * r_calc(p) * pow(1 + r_calc(p), n) / (12 * (pow(1 + r_calc(p), n) - 1));
+		p = startValue + (endValue - startValue)/2;
+		if (m_var > m)
 		{
-			endValue = p;
-			p = p - (p - startValue)/2;
+			endValue = p - 1;
+			/*p = startValue + (endValue - startValue)/2;
+			endValue = p;*/
 		}
 		else
 		{
-			startValue = p;
-			p = p + (endValue - p)/2;
+			startValue = p + 1;
+			/*p = p + (endValue - startValue)/2;
+			startValue = p;*/
 		}
-		diff = abs(m_perm - m);
+		diff = abs(m_var - m);
 	}
 	std::cout << p << "\n";
 }
@@ -95,25 +102,32 @@ void Task3::task4(std::string path) {
 	fin.close();
 }
 
-void Task3::task5() {
-	std::string sorted;
-	std::string String30;
-	std::cin >> String30;
+std::string Task3::task5(std::string String30) {
+	static int a = 0;
+	a++;
+	std::string pivotString;
+	std::string sorted_less;
+	std::string sorted_more;
 	char number_to_paste = 0;
+	char pivot = String30[0];
 	for (int i = 0; i < String30.length(); i++)
 	{
-		for (int j = 0; j < String30.length(); j++) {
-			if (String30[i] > String30[j])
-			{
-				number_to_paste = String30[i];
-				String30[i] = String30[j];
-				String30[j] = number_to_paste;
-				i = 0;
-				break;
-			}
+		if (String30[i] < pivot)
+		{
+			sorted_less += String30[i];
+		}
+		else if (String30[i] > pivot)
+		{
+			sorted_more = String30[i];
+		}
+		else
+		{
+			pivotString += String30[i];
 		}
 	}
-	std::cout << String30;
+	sorted_less = task5(sorted_less);
+	sorted_more = task5(sorted_more);
+	return sorted_less + pivotString + sorted_more;
 }
 
 double Task3::r_calc(double p) {

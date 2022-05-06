@@ -31,7 +31,7 @@ public:
 
 	void task8();
 
-	void task9(long number, byte systemNumberWas, byte systemNumberWanted);
+	void task9(std::string number, byte systemNumberWas, byte systemNumberWanted);
 private:
 	double circleArea(double R);
 	double rectangleArea(double a, double b);

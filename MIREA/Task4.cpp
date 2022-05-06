@@ -237,20 +237,28 @@ void Task4::task8()
 
 }
 
-void Task4::task9(long number, byte systemNumberWas, byte systemNumberWanted)
+void Task4::task9(std::string number, byte systemNumberWas, byte systemNumberWanted)
 {
-	if (number < 0)
-		std::cout << "There is an error\n";
-	else
+	std::map<char, byte> stringNumbers;
+	byte counter = 10;
+	for (byte i = 65; i <= 90; i++)
 	{
-		std::map<char, byte> stringNumbers;
-		byte counter = 10;
-		for (byte i = 65; i <= 90; i++)
+		stringNumbers[char(i)] = counter++;
+	}
+	byte maxCharIndex = systemNumberWas;
+	long newNumberIn10 = 0;
+	int a = 0;
+	if (systemNumberWas > 10) {
+		for (int i = 0; i < number.length(); i++)
 		{
-			stringNumbers[char(i)] = counter++;
+			if (stringNumbers.count(number.at(i)) > 0) {
+				newNumberIn10 += stringNumbers.at(number.at(i)) * pow(systemNumberWas, number.length() - (i + 1));
+			}
+			else
+			{
+				newNumberIn10 += (number.at(i) - '0') * pow(systemNumberWas, number.length() - (i + 1));
+			}
 		}
-		byte maxCharIndex = systemNumberWas;
-
 	}
 
 }
