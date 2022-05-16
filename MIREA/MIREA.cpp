@@ -20,7 +20,7 @@ int main()
     Task3 obj2;
     Task4 obj3;
     Task5 obj4;
-    obj3.task9("ADCD", 16, 12);
+    obj3.task9("112D", 16, 8);
     //obj1->task5();
     //obj2->task3("task3.txt");
     //obj3->task4();

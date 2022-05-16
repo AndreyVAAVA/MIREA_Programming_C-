@@ -304,7 +304,7 @@ void Task4::task9(std::string number, byte systemNumberWas, byte systemNumberWan
 	std::cout << newNumberIn10 << "\n";
 	std::string newNumberIn = "";
 	int currNumber = 0;
-	while (newNumberIn10 > systemNumberWanted)
+	while (newNumberIn10 >= systemNumberWanted)
 	{
 		currNumber = newNumberIn10 % systemNumberWanted;
 		newNumberIn10 /= systemNumberWanted;
