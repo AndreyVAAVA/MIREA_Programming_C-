@@ -108,7 +108,6 @@ void Task3::task5(std::string& str30, int left, int right) {
 	int i = left, j = right;
 	int mid = str30[(left + right) / 2];
 
-	/* partition */
 	while (i <= j) {
 		while (str30[i] < mid)
 			i++;
