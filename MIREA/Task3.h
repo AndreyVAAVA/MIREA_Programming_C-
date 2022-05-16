@@ -12,10 +12,10 @@ private:
 
 public:
 	void task1();
-	void task2();
+	void task2(double m, double n, double S);
 	void task3(std::string path);
 	void task4(std::string path);
-	std::string task5(std::string String30);
+	void task5(std::string& str30, int left, int right);
 
 };
 

@@ -18,22 +18,22 @@ void Task3::task1() {
 		std::cout << "There is an error\n";
 	}
 }
-void Task3::task2() {
+void Task3::task2(double m, double n, double S) {
 	//29982
 	//10
 	//2000000
-	double m, p, n, S, m_var;
-	std::cin >> m >> n >> S;
+	long double p, m_var;
 	m_var = 0;
-	p = DBL_MAX/2;
-	double diff = abs(m - m_var);
-	double endValue = DBL_MAX/2;
-	double startValue = 0;
-	double middle = 0;
+	p = 1000;
+	long double diff = abs(m - m_var);
+	float endValue = 1000000;
+	float startValue = 0;
+	float middle = 0;
+	
 	while (!(diff >= 0 && diff < 0.1))
 	{
+		p = (startValue + endValue) / 2;
 		m_var = S * r_calc(p) * pow(1 + r_calc(p), n) / (12 * (pow(1 + r_calc(p), n) - 1));
-		p = startValue + (endValue - startValue)/2;
 		if (m_var > m)
 		{
 			endValue = p - 1;
@@ -102,32 +102,28 @@ void Task3::task4(std::string path) {
 	fin.close();
 }
 
-std::string Task3::task5(std::string String30) {
-	static int a = 0;
-	a++;
-	std::string pivotString;
-	std::string sorted_less;
-	std::string sorted_more;
-	char number_to_paste = 0;
-	char pivot = String30[0];
-	for (int i = 0; i < String30.length(); i++)
-	{
-		if (String30[i] < pivot)
-		{
-			sorted_less += String30[i];
+
+
+void Task3::task5(std::string& str30, int left, int right) {
+	int i = left, j = right;
+	int mid = str30[(left + right) / 2];
+
+	/* partition */
+	while (i <= j) {
+		while (str30[i] < mid)
+			i++;
+		while (str30[j] > mid)
+			j--;
+		if (i <= j) {
+			std::swap(str30[i], str30[j]);
+			i++; j--;
 		}
-		else if (String30[i] > pivot)
-		{
-			sorted_more = String30[i];
-		}
-		else
-		{
-			pivotString += String30[i];
-		}
-	}
-	sorted_less = task5(sorted_less);
-	sorted_more = task5(sorted_more);
-	return sorted_less + pivotString + sorted_more;
+	};
+
+	if (left < j)
+		task5(str30, left, j);
+	if (i < right)
+		task5(str30, i, right);
 }
 
 double Task3::r_calc(double p) {

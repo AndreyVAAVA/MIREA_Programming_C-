@@ -13,11 +13,14 @@
 
 int main()
 {
+    //29982
+//10
+//2000000
     Task2 obj1;
-    Task3* obj2 = new Task3();
-    Task4* obj3 = new Task4();
+    Task3 obj2;
+    Task4 obj3;
     Task5 obj4;
-    obj4.task1(48, 32, true);
+    obj3.task9("ADCD", 16, 12);
     //obj1->task5();
     //obj2->task3("task3.txt");
     //obj3->task4();

@@ -234,21 +234,55 @@ long Task4::task7(int m, int b, int c, long i)
 
 void Task4::task8()
 {
+	int a[3][4] = { {5, 2, 0, 10}, {3, 5, 2, 5}, {20, 0, 0, 0} };
+	float b[4][2] = { {1.20, 0.50}, {2.8, 0.4}, {5.0, 1.0}, {2.0, 1.5} };
+	float money[3][4];
+	float moneySum[3] = { 0, 0, 0 };
+	float totalMoney = 0;
+	float commisions[3][4];
+	float commisionsSum[3] = { 0, 0, 0 };
+	float totalComissions = 0;
+	float diff[3][4];
+	float diffSum[3] = { 0, 0, 0 };
+	float totalDiff = 0;
+	for (int i = 0; i < sizeof(a) / sizeof(*a); i++)
+	{
+		for (int j = 0; j < sizeof(a[i]) / sizeof(*a[i]); j++)
+		{
+			money[i][j] = a[i][j] * b[j][0];
+			moneySum[i] += money[i][j];
+			commisions[i][j] = a[i][j] * b[j][1];
+			commisionsSum[i] += commisions[i][j];
+			diff[i][j] = a[i][j] * (b[j][0] - b[j][1]);
+			diffSum[i] += diff[i][j];
+		}
+		totalMoney += moneySum[i];
+		totalComissions += commisionsSum[i];
+		totalDiff += diffSum[i];
+	}
+	std::cout << "1.Money\n2.Comissions\n3.Difference\n";
+	for (int i = 0; i < 3; i++)
+	{
+		printf("Seller %i m - %f c - %f d - %f\n", i + 1, moneySum[i], commisionsSum[i], diffSum[i]);
+	}
+	printf("Total money - %f, commissions - %f, difference - %f", totalMoney, totalComissions, totalDiff);
 
 }
 
 void Task4::task9(std::string number, byte systemNumberWas, byte systemNumberWanted)
 {
 	std::map<char, byte> stringNumbers;
+	std::map<byte, char> numbersString;
 	byte counter = 10;
 	for (byte i = 65; i <= 90; i++)
 	{
-		stringNumbers[char(i)] = counter++;
+		stringNumbers[char(i)] = counter;
+		numbersString[counter++] = char(i);
 	}
 	byte maxCharIndex = systemNumberWas;
 	long newNumberIn10 = 0;
 	int a = 0;
-	if (systemNumberWas > 10) {
+	if (systemNumberWas != 10) {
 		for (int i = 0; i < number.length(); i++)
 		{
 			if (stringNumbers.count(number.at(i)) > 0) {
@@ -260,6 +294,31 @@ void Task4::task9(std::string number, byte systemNumberWas, byte systemNumberWan
 			}
 		}
 	}
+	else
+	{
+		newNumberIn10 = std::stol(number);
+	}
+
+	number = std::to_string(newNumberIn10);
+
+	std::cout << newNumberIn10 << "\n";
+	std::string newNumberIn = "";
+	int currNumber = 0;
+	while (newNumberIn10 > systemNumberWanted)
+	{
+		currNumber = newNumberIn10 % systemNumberWanted;
+		newNumberIn10 /= systemNumberWanted;
+		if (numbersString.count(currNumber) > 0) {
+			newNumberIn += numbersString.at(currNumber);
+		}
+		else
+		{
+			newNumberIn += std::to_string(currNumber);
+		}
+	}
+	newNumberIn += std::to_string(newNumberIn10);
+	std::reverse(newNumberIn.begin(), newNumberIn.end());
+	std::cout << newNumberIn;
 
 }
 
