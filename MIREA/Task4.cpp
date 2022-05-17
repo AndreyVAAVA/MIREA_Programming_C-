@@ -157,7 +157,19 @@ void Task4::task5()
 		MoveToEx(hDC, scale * x + 100, -scale * sin(x) + 85, NULL);
 		LineTo(hDC, scale * x + 100, -scale * sin(x) + 85);
 	}
-	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
+	// If first doesn't work, try this
+	/*HWND hwnd = GetConsoleWindow();
+	HDC hdc = GetDC(hwnd);
+
+	int x = 0;
+	for (float i = 0; i < 3.14 * 10; i += 0.05)
+	{
+		SetPixel(hdc, x, 50 + 25 * cos(i), RGB(255, 255, 255));
+		x += 1;
+	}
+
+	ReleaseDC(hwnd, hdc);
+	std::cin.ignore();*/
 }
 
 void Task4::task6()
