@@ -61,9 +61,48 @@ void Task5::task2(long until) {
 	std::cout << "\n";
 }
 
-void Task5::fileTask19()
+void Task5::fileProcessingTask19(std::string path)
 {
+	setlocale(LC_ALL, "Ru");
+	std::map<char, long> amountOfChars;
+	char el;
+	std::ifstream fin(path);
+	if (!fin)
+	{
+		std::cout << "you entered wrong file name or file doesn't exists";
+	}
+	while (fin.get(el))
+	{
+		amountOfChars[el] = amountOfChars.count(el) > 0 ? amountOfChars[el] + 1 : 1;
 
+	}
+	std::map<char, long>::iterator best = std::max_element(amountOfChars.begin(), amountOfChars.end(), [](const std::pair<char, long>& a, const std::pair<char, long>& b)->bool { return a.second < b.second; });
+	for (int i = 0; i < amountOfChars.size(); i++)
+	{
+		if (amountOfChars.at(i) == best->first) std::cout << amountOfChars.at(i);
+	}
+	fin.close();
+}
+
+void Task5::fileProcessingTask32(std::string pathReadFile, std::string pathWriteFile)
+{
+	setlocale(LC_ALL, "Ru");
+	char el;
+	std::ifstream fin(pathReadFile);
+	std::string result = "";
+	if (!fin)
+	{
+		std::cout << "you entered wrong file name or file doesn't exists";
+	}
+	while (fin.get(el))
+	{
+		result += (el + 1);
+
+	}
+	fin.close();
+	std::ofstream fout(pathWriteFile);
+	fout << result;
+	fout.close();
 }
 
 void Task5::seriesTask16(double e)
@@ -119,4 +158,9 @@ void Task5::seriesTask47()
 		}
 		std::cout << diagonalSum << "\n";
 	}
+}
+
+void Task5::fileTask5(std::string path)
+{
+
 }
