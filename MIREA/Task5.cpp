@@ -57,7 +57,7 @@ void Task5::task2(long until) {
 	{
 		if (numbersUntil[i] != 0) std::cout << numbersUntil[i] << " ";
 	}
-	delete [] numbersUntil;
+	delete[] numbersUntil;
 	std::cout << "\n";
 }
 
@@ -77,9 +77,10 @@ void Task5::fileProcessingTask19(std::string path)
 
 	}
 	std::map<char, long>::iterator best = std::max_element(amountOfChars.begin(), amountOfChars.end(), [](const std::pair<char, long>& a, const std::pair<char, long>& b)->bool { return a.second < b.second; });
+	long maxValue = amountOfChars[best->first];
 	for (int i = 0; i < amountOfChars.size(); i++)
 	{
-		if (amountOfChars.at(i) == best->first) std::cout << amountOfChars.at(i);
+		if (amountOfChars.at(i) == maxValue) std::cout << amountOfChars.at(i);
 	}
 	fin.close();
 }
@@ -96,7 +97,8 @@ void Task5::fileProcessingTask32(std::string pathReadFile, std::string pathWrite
 	}
 	while (fin.get(el))
 	{
-		result += (el + 1);
+		el += 1;
+		result += el;
 
 	}
 	fin.close();
@@ -108,12 +110,12 @@ void Task5::fileProcessingTask32(std::string pathReadFile, std::string pathWrite
 void Task5::seriesTask16(double e)
 {
 	long n = 1;
-	double oneToThree = 0;
+	double oneToThree = 1 / pow(3, n);
 	double y = 0;
 	while (oneToThree >= e)
 	{
 		oneToThree = 1 / pow(3, n);
-		y += oneToThree*pow(cos(pow(3, n-1)), 3);
+		y += oneToThree * pow(cos(pow(3, n - 1)), 3);
 		n++;
 	}
 	std::cout << y << "\n";
@@ -132,7 +134,7 @@ void Task5::seriesTask47()
 	}
 	else
 	{
-		long** matrix = new long*[a];
+		long** matrix = new long* [a];
 		for (long i = 0; i < b; i++)
 			matrix[i] = new long[b];
 		long value;
@@ -140,11 +142,12 @@ void Task5::seriesTask47()
 		{
 			for (long j = 0; j < b; j++)
 			{
-				printf("Enter value for row %d and column %d: ", i+1, j+1);
-				std::cin >> value;
-				matrix[i][j] = value;
+				matrix[i][j] = rand() % 100;
+				std::cout << matrix[i][j] << " ";
 			}
+			std::cout << "\n";
 		}
+
 		long diagonalSum = 0;
 		for (long i = 0; i < a; i++)
 		{
@@ -160,7 +163,115 @@ void Task5::seriesTask47()
 	}
 }
 
-void Task5::fileTask5(std::string path)
+void Task5::fileTask5(std::string path, long a, long b)
 {
+	setlocale(LC_ALL, "Ru");
+	char el;
+	std::ifstream fin(path);
+	std::string result = "";
+	if (!fin)
+	{
+		std::cout << "you entered wrong file name or file doesn't exists";
+	}
+	long** matrix = new long* [a];
+	for (long i = 0; i < b; i++)
+		matrix[i] = new long[b];
+	long i = 0, k = 0;
+	int slashNCounter = 0;
+	while (fin.get(el))
+	{
+		el == ' ' ? result = "" : result += el;
+		if (slashNCounter >= 2)
+		{
+			slashNCounter = 0;
+			break;
+		}
+		if (el == '\n')
+		{
+			slashNCounter += 1;
+			matrix[i][k] = std::atoi(result.c_str());
+			result = "";
+			k++;
+			i = 0;
+		}
+		if (el == ' ')
+		{
+			slashNCounter = 0;
+			matrix[i][k] = std::atoi(result.c_str());
+			i++;
+			result = "";
+		}
+		else
+		{
+			slashNCounter = 0;
+			result += el;
+		}
 
+	}
+	while (fin.get(el))
+	{
+		el == ' ' ? result = "" : result += el;
+		if (slashNCounter >= 2)
+		{
+			slashNCounter = 0;
+			break;
+		}
+		if (el == '\n')
+		{
+			slashNCounter += 1;
+			matrix[i][k] = std::atoi(result.c_str());
+			result = "";
+			k++;
+			i = 0;
+		}
+		if (el == ' ')
+		{
+			slashNCounter = 0;
+			matrix[i][k] = std::atoi(result.c_str());
+			i++;
+			result = "";
+		}
+		else
+		{
+			slashNCounter = 0;
+			result += el;
+		}
+
+	}
+	findBiggest(matrix, a, b);
+
+	fin.close();
+
+}
+
+void Task5::findBiggest(long** matrix, long a, long b) {
+	long currElem = 0;
+	long isBiggest = true;
+	for (long i = 0; i < a; i++)
+	{
+		for (long j = 0; j < b; j++)
+		{
+			currElem = matrix[i][j];
+			for (long l = 0; l < a; l++)
+			{
+				if (currElem < matrix[l][j])
+				{
+					isBiggest = false;
+				}
+
+			}
+			for (long m = 0; m < b; m++)
+			{
+				if (currElem < matrix[i][m])
+				{
+					isBiggest = false;
+				}
+			}
+			if (isBiggest)
+			{
+				std::printf("Column = %d Row = %d", i, j);
+				return;
+			}
+		}
+	}
 }

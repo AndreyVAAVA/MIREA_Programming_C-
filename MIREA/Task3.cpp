@@ -26,11 +26,11 @@ void Task3::task2(double m, double n, double S) {
 	m_var = 0;
 	p = 1000;
 	long double diff = abs(m - m_var);
-	float endValue = 1000000;
-	float startValue = 0;
-	float middle = 0;
-	
-	while (!(diff >= 0 && diff < 0.1))
+	double endValue = 1000000;
+	double startValue = 0;
+	double middle = 0;
+
+	while ((diff > 0.000000001))
 	{
 		p = (startValue + endValue) / 2;
 		m_var = S * r_calc(p) * pow(1 + r_calc(p), n) / (12 * (pow(1 + r_calc(p), n) - 1));
@@ -48,7 +48,7 @@ void Task3::task2(double m, double n, double S) {
 		}
 		diff = abs(m_var - m);
 	}
-	std::cout << p << "\n";
+	std::cout << std::fixed << std::setprecision(7) << p << "\n";
 }
 void Task3::task3(std::string path) {
 	setlocale(LC_ALL, "Ru");

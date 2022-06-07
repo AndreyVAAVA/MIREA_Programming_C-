@@ -20,7 +20,8 @@ int main()
     Task3 obj2;
     Task4 obj3;
     Task5 obj4;
-    obj3.task5();
+   // obj4.fileProcessingTask32("task3.txt", "task5Matrix.txt");
+    obj4.fileTask5("task5Matrix.txt");
     //obj1->task5();
     //obj2->task3("task3.txt");
     //obj3->task4();

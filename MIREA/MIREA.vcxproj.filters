@@ -47,5 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="task3.txt" />
+    <Text Include="task5Matrix.txt" />
   </ItemGroup>
 </Project>

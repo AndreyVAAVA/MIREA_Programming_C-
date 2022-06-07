@@ -143,22 +143,22 @@ void Task4::task4()
 void Task4::task5()
 {
 	//std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
-	float x;
-	HDC hDC = GetDC(GetConsoleWindow());
-	HPEN Pen = CreatePen(PS_SOLID, 2, RGB(255, 255, 255));
-	SelectObject(hDC, Pen);
-	MoveToEx(hDC, 0, 85, NULL);
-	LineTo(hDC, 200, 85);
-	/*MoveToEx(hDC, 100, 0, NULL);
-	LineTo(hDC, 100, 170);*/
-	int scale = 10;
-	for (x = -8.0f; x <= 8.0f; x += 0.01f) // O(100,85) - center
-	{
-		MoveToEx(hDC, scale * x + 100, -scale * sin(x) + 85, NULL);
-		LineTo(hDC, scale * x + 100, -scale * sin(x) + 85);
-	}
+	//float x;
+	//HDC hDC = GetDC(GetConsoleWindow());
+	//HPEN Pen = CreatePen(PS_SOLID, 2, RGB(255, 255, 255));
+	//SelectObject(hDC, Pen);
+	//MoveToEx(hDC, 0, 85, NULL);
+	//LineTo(hDC, 200, 85);
+	///*MoveToEx(hDC, 100, 0, NULL);
+	//LineTo(hDC, 100, 170);*/
+	//int scale = 10;
+	//for (x = -8.0f; x <= 8.0f; x += 0.01f) // O(100,85) - center
+	//{
+	//	MoveToEx(hDC, scale * x + 100, -scale * sin(x) + 85, NULL);
+	//	LineTo(hDC, scale * x + 100, -scale * sin(x) + 85);
+	//}
 	// If first doesn't work, try this
-	/*HWND hwnd = GetConsoleWindow();
+	HWND hwnd = GetConsoleWindow();
 	HDC hdc = GetDC(hwnd);
 
 	int x = 0;
@@ -169,7 +169,7 @@ void Task4::task5()
 	}
 
 	ReleaseDC(hwnd, hdc);
-	std::cin.ignore();*/
+	std::cin.ignore();
 }
 
 void Task4::task6()
@@ -272,6 +272,40 @@ void Task4::task8()
 		totalComissions += commisionsSum[i];
 		totalDiff += diffSum[i];
 	}
+	std::cout << "Original matrix\n";
+	for (int i = 0; i < sizeof(a) / sizeof(*a); i++)
+	{
+		for (int j = 0; j < sizeof(a[i]) / sizeof(*a[i]); j++)
+		{
+			std::cout << a[i][j] << " ";
+		}
+		std::cout << "\n";
+	}
+	std::cout << "Original matrix\n";
+	for (int i = 0; i < sizeof(b) / sizeof(*b); i++)
+	{
+		for (int j = 0; j < sizeof(b[i]) / sizeof(*b[i]); j++)
+		{
+			std::cout << b[i][j] << " ";
+		}
+		std::cout << "\n";
+	}
+	double maxMoneySum = 0;
+	std::cout << "Money matrix\n";
+	for (int i = 0; i < sizeof(moneySum) / sizeof(*moneySum); i++)
+	{
+		std::cout << moneySum[i] << "\n";
+	}
+	std::cout << "Comissions matrix\n";
+	for (int i = 0; i < sizeof(commisionsSum) / sizeof(*commisionsSum); i++)
+	{
+		std::cout << commisionsSum[i] << "\n";
+	}
+	std::cout << "Difference matrix\n";
+	for (int i = 0; i < sizeof(diffSum) / sizeof(*diffSum); i++)
+	{
+		std::cout << diffSum[i] << "\n";
+	}
 	std::cout << "1.Money\n2.Comissions\n3.Difference\n";
 	for (int i = 0; i < 3; i++)
 	{
@@ -298,11 +332,29 @@ void Task4::task9(std::string number, byte systemNumberWas, byte systemNumberWan
 		for (int i = 0; i < number.length(); i++)
 		{
 			if (stringNumbers.count(number.at(i)) > 0) {
-				newNumberIn10 += stringNumbers.at(number.at(i)) * pow(systemNumberWas, number.length() - (i + 1));
+				if (stringNumbers.at(number.at(i)) <= systemNumberWas - 1)
+				{
+					newNumberIn10 += stringNumbers.at(number.at(i)) * pow(systemNumberWas, number.length() - (i + 1));
+				}
+				else
+				{
+					std::cout << "There is an error";
+					return;
+				}
+
 			}
 			else
 			{
-				newNumberIn10 += (number.at(i) - '0') * pow(systemNumberWas, number.length() - (i + 1));
+				if ((number.at(i) - '0') <= systemNumberWas - 1)
+				{
+					newNumberIn10 += (number.at(i) - '0') * pow(systemNumberWas, number.length() - (i + 1));
+				}
+				else
+				{
+					std::cout << "There is an error";
+					return;
+				}
+
 			}
 		}
 	}
@@ -328,10 +380,29 @@ void Task4::task9(std::string number, byte systemNumberWas, byte systemNumberWan
 			newNumberIn += std::to_string(currNumber);
 		}
 	}
-	newNumberIn += std::to_string(newNumberIn10);
+	if (numbersString.count(newNumberIn10) > 0)
+	{
+		newNumberIn += numbersString[newNumberIn10];
+	}
+	else
+	{
+		newNumberIn += std::to_string(newNumberIn10);
+	}
+
 	std::reverse(newNumberIn.begin(), newNumberIn.end());
 	std::cout << newNumberIn;
 
+}
+
+void printMatrix(int** arr) {
+	for (int i = 0; i < sizeof(arr) / sizeof(*arr); i++)
+	{
+		for (int j = 0; j < sizeof(arr[i]) / sizeof(*arr[i]); j++)
+		{
+			std::cout << arr[i][j] << " ";
+		}
+		std::cout << "\n";
+	}
 }
 
 double Task4::circleArea(double R)

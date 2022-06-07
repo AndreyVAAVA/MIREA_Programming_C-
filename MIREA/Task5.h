@@ -14,6 +14,8 @@ public:
 	void fileProcessingTask32(std::string pathReadFile, std::string pathWriteFile);
 	void seriesTask16(double e);
 	void seriesTask47();
-	void fileTask5(std::string path);
+	void fileTask5(std::string path, long a, long b);
+private:
+	void findBiggest(long** matrix, long a, long b);
 };
 
